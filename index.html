@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <title>
         Why are the flags up in Finland?
     </title>
@@ -18,7 +19,9 @@
     <![endif]-->
 
     <style type="text/css">
-        .intro, .reason, .other_reason {
+        .intro,
+        .reason,
+        .other_reason {
             font-family: sans-serif;
             font-weight: normal;
             text-align: center;
@@ -42,13 +45,13 @@
         }
 
         #reason-container {
-          padding: 5px;
-          position: absolute;
-          top: 48px;
-          bottom: 60px;
-          left: 0;
-          right: 0;
-          text-align: center;
+            padding: 5px;
+            position: absolute;
+            top: 48px;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            text-align: center;
         }
 
         /* Sticky footer */
@@ -56,7 +59,8 @@
             margin: 0;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
         }
 
@@ -71,13 +75,13 @@
             display: block;
         }
 
-        .site-footer, .page-wrap:after {
+        .site-footer,
+        .page-wrap:after {
             /* .push must be the same height as footer */
             height: 60px;
         }
 
-        .site-footer {
-        }
+        .site-footer {}
 
         /* Background image */
         html {
@@ -97,13 +101,34 @@
             left: 5px;
             position: absolute;
         }
+
+        /* yesterday and tomorrow button */
+        .direction-container {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .direction-container>a{
+            border: 2px solid;
+            padding: 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #000;
+            transition: all 0.5s;
+        }
+        .direction-container>a:hover{
+            background-color: #18447E;
+            color: #fff;
+        }
     </style>
 
     <script src='jquery-1.11.2.min.js'></script>
     <script src="jquery.textfill.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 
     <script type="text/javascript">
-        <!--
+        // <!--
         var SUNDAY = 0;
         var MONDAY = 1;
         var TUESDAY = 2;
@@ -127,7 +152,7 @@
 
         function getURLParameter(name) {
             return decodeURI(
-                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
             );
         }
 
@@ -231,7 +256,7 @@
         // General election every fourth year. Since 2011: third Sunday in April.
         if (is_xth_day_in_month(date, 3, SUNDAY, APRIL)) {
             if ((yyyy - 2011) % 4 === 0) {
-            reason = "A parliamentary election";
+                reason = "A parliamentary election";
             }
         }
 
@@ -258,8 +283,8 @@
 
         // Format like 4th June 2014
         var m_names = ["January", "February", "March",
-                "April", "May", "June", "July", "August", "September",
-                "October", "November", "December"];
+            "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"];
         var suffix = "";
         if (dd === 1 || dd === 21 || dd === 31) {
             suffix = "st";
@@ -284,65 +309,80 @@
             enable_background_image = false;
         }
 
-$(document).ready(function() {
-    $('#intro').html(intro);
-    $('#reason').html(reason);
-    $('#other_reason').html(other_reason);
-    $('#date').html(date_format);
-    if (enable_background_image) {
-        var htmlElement = document.querySelector("html");
-        htmlElement.style.backgroundImage = 'url(flag.jpg)';
-        $("#reason").addClass("outline");
-        $(".reason-container").css({"bottom": "0"});
-    }
-    $('#reason-container').textfill({maxFontPixels: 0});
-});
+        $(document).ready(function () {
+            $('#intro').html(intro);
+            $('#reason').html(reason);
+            $('#other_reason').html(other_reason);
+            $('#date').html(date_format);
+            if (enable_background_image) {
+                var htmlElement = document.querySelector("html");
+                htmlElement.style.backgroundImage = 'url(flag.jpg)';
+                $("#reason").addClass("outline");
+                $(".reason-container").css({ "bottom": "0" });
+            }
+            $('#reason-container').textfill({ maxFontPixels: 0 });
+            // - yesterday button
+            const yesterday = moment().subtract(1, 'days').format('D-MMM-YYYY');
+            $('#yesterday').attr('href', 'https://whyaretheflagsup.github.io/?date='+yesterday);
+            // - tomorrow button
+            const tomorrow = moment().add(1, 'days').format('D-MMM-YYYY');
+            $('#tomorrow').attr('href', 'https://whyaretheflagsup.github.io/?date='+tomorrow);
+        });
 
-$(window).resize(function() {
-  $('#reason-container').textfill({maxFontPixels: 0});
-});
+        $(window).resize(function () {
+            $('#reason-container').textfill({ maxFontPixels: 0 });
+        });
 
-        -->
+        // -->
     </script>
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
                     m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-2827121-8', 'hugovk.github.io');
         ga('send', 'pageview');
     </script>
 </head>
-<body>
-<div class="page-wrap">
 
-    <div class="twitter-button">
-        <a href="https://twitter.com/FinnishFlags" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @FinnishFlags</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<body>
+    <div class="page-wrap">
+
+        <div class="twitter-button">
+            <a href="https://twitter.com/FinnishFlags" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow
+                @FinnishFlags</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+        </div>
+
+        <a class="github-fork-ribbon left-right" href="https://github.com/whyaretheflagsup/whyaretheflagsup" title="Fork me on GitHub">Fork
+            me on GitHub</a>
+
+        <H2>
+            <div id="intro" class="intro outline"></div>
+        </H2>
+        <H1>
+            <div id="reason-container"><span id="reason" class="reason"></span></div>
+        </H1>
+
+        <div class="direction-container">
+            <a id="yesterday"><-Yesterday</a>
+            <a id="tomorrow">Tomorrow -></a>
+        </div>
     </div>
 
-    <a class="github-fork-ribbon left-right" href="https://github.com/whyaretheflagsup/whyaretheflagsup" title="Fork me on GitHub">Fork me on GitHub</a>
+    <footer class="site-footer">
+        <P>&nbsp;</P>
 
-    <H2>
-        <div id="intro" class="intro outline"></div>
-    </H2>
-    <H1>
-        <div id="reason-container"><span id="reason" class="reason"></span></div>
-    </H1>
-
-</div>
-
-<footer class="site-footer"><P>&nbsp;</P>
-
-    <div id="other_reason" class="other_reason"></div>
-</footer>
+        <div id="other_reason" class="other_reason"></div>
+    </footer>
 </body>
+
 </html>
