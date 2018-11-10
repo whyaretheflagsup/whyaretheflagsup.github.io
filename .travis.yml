@@ -19,4 +19,4 @@ script:
  - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then black --check --diff .; fi
 
  # Dry run
- - python whyaretheflagsup.py --test -y whyaretheflagsup_example.yaml -i flag.jpg
+ - python whyaretheflagsup.py --test -y whyaretheflagsup_example.yaml -i images/flag.jpg
