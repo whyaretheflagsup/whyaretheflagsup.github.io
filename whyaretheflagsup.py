@@ -3,7 +3,6 @@
 """
 Scrape'n'tweet when the flags are up
 """
-from __future__ import print_function, unicode_literals
 from bs4 import BeautifulSoup  # pip install BeautifulSoup4
 from selenium import webdriver  # pip install selenium
 import argparse
@@ -54,8 +53,7 @@ def load_yaml(filename):
     with open(filename) as f:
         data = yaml.safe_load(f)
 
-    keys = data.viewkeys() if sys.version_info.major == 2 else data.keys()
-    if not keys >= {
+    if not data.keys() >= {
         "access_token",
         "access_token_secret",
         "consumer_key",
