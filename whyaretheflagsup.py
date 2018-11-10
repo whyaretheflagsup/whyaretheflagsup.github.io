@@ -172,8 +172,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i",
         "--image",
-        # TODO directory/spec. See randimgbot.py
-        default="/Users/hugo/Dropbox/bin/data/finnishflags/flag*",
+        default="images/flag*",
         help="Path to an image of a flag to upload",
     )
     parser.add_argument(
