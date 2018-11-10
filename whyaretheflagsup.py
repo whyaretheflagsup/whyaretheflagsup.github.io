@@ -66,6 +66,7 @@ def load_yaml(filename):
 def build_tweet(reason):
     tweet = "Flags are up in Finland because today is: " + reason
 
+    # TODO increase to 280 chars
     # An HTTPS link takes 23 characters.
     max = 116 - 1 - 23  # max tweet with image - space - link
     if len(tweet) > max:
