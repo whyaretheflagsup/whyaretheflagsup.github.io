@@ -22,15 +22,14 @@ HELSINKI_LONG = 24.9375
 
 def timestamp():
     """ Print a timestamp and the filename with path """
-    print(datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p") + " " +
-          __file__)
+    print(datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p") + " " + __file__)
 
 
 def flag_reason():
 
     url = "https://whyaretheflagsup.github.io"
 
-#     driver = webdriver.Chrome()
+    # driver = webdriver.Chrome()
     driver = webdriver.PhantomJS(service_log_path=os.path.devnull)  # headless
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, "lxml")
@@ -57,8 +56,10 @@ def load_yaml(filename):
 
     keys = data.viewkeys() if sys.version_info.major == 2 else data.keys()
     if not keys >= {
-        'access_token', 'access_token_secret',
-        'consumer_key', 'consumer_secret'
+        "access_token",
+        "access_token_secret",
+        "consumer_key",
+        "consumer_secret",
     }:
         sys.exit("Twitter credentials missing from YAML: " + filename)
     return data
@@ -70,7 +71,7 @@ def build_tweet(reason):
     # An HTTPS link takes 23 characters.
     max = 116 - 1 - 23  # max tweet with image - space - link
     if len(tweet) > max:
-        tweet = tweet[:max-1] + "…"
+        tweet = tweet[: max - 1] + "…"
 
     url = "https://whyaretheflagsup.github.io"
     tweet += " " + url
@@ -100,11 +101,14 @@ def tweet_it(string, credentials, image=None):
     # Create and authorise an app with (read and) write access at:
     # https://dev.twitter.com/apps/new
     # Store credentials in YAML file
-    t = twitter.Twitter(auth=twitter.OAuth(
-        credentials['access_token'],
-        credentials['access_token_secret'],
-        credentials['consumer_key'],
-        credentials['consumer_secret']))
+    t = twitter.Twitter(
+        auth=twitter.OAuth(
+            credentials["access_token"],
+            credentials["access_token_secret"],
+            credentials["consumer_key"],
+            credentials["consumer_secret"],
+        )
+    )
 
     print("TWEETING THIS:\n", string)
 
@@ -120,23 +124,32 @@ def tweet_it(string, credentials, image=None):
             with open(image, "rb") as imagefile:
                 imagedata = imagefile.read()
             # TODO dedupe auth=OAuth(...)
-            t_up = twitter.Twitter(domain='upload.twitter.com',
-                                   auth=twitter.OAuth(
-                                       credentials['access_token'],
-                                       credentials['access_token_secret'],
-                                       credentials['consumer_key'],
-                                       credentials['consumer_secret']))
+            t_up = twitter.Twitter(
+                domain="upload.twitter.com",
+                auth=twitter.OAuth(
+                    credentials["access_token"],
+                    credentials["access_token_secret"],
+                    credentials["consumer_key"],
+                    credentials["consumer_secret"],
+                ),
+            )
             id_img = t_up.media.upload(media=imagedata)["media_id_string"]
         else:
             id_img = None  # Does t.statuses.update work with this?
 
         result = t.statuses.update(
             status=string,
-            lat=HELSINKI_LAT, long=HELSINKI_LONG,
+            lat=HELSINKI_LAT,
+            long=HELSINKI_LONG,
             display_coordinates=True,
-            media_ids=id_img)
-        url = "http://twitter.com/" + \
-            result['user']['screen_name'] + "/status/" + result['id_str']
+            media_ids=id_img,
+        )
+        url = (
+            "http://twitter.com/"
+            + result["user"]["screen_name"]
+            + "/status/"
+            + result["id_str"]
+        )
         print("Tweeted:\n" + url)
         if not args.no_web:
             webbrowser.open(url, new=2)  # 2 = open in a new tab, if possible
@@ -148,22 +161,33 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
         description="Scrape'n'tweet when the flags are up",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
     parser.add_argument(
-        '-y', '--yaml',
-        default='/Users/hugo/Dropbox/bin/data/whyaretheflagsup.yaml',
-        help="YAML file location containing Twitter keys and secrets")
+        "-y",
+        "--yaml",
+        default="/Users/hugo/Dropbox/bin/data/whyaretheflagsup.yaml",
+        help="YAML file location containing Twitter keys and secrets",
+    )
     parser.add_argument(
-        '-i', '--image',
+        "-i",
+        "--image",
         # TODO directory/spec. See randimgbot.py
-        default='/Users/hugo/Dropbox/bin/data/finnishflags/flag*',
-        help="Path to an image of a flag to upload")
+        default="/Users/hugo/Dropbox/bin/data/finnishflags/flag*",
+        help="Path to an image of a flag to upload",
+    )
     parser.add_argument(
-        '-nw', '--no-web', action='store_true',
-        help="Don't open a web browser to show the tweeted tweet")
+        "-nw",
+        "--no-web",
+        action="store_true",
+        help="Don't open a web browser to show the tweeted tweet",
+    )
     parser.add_argument(
-        '-x', '--test', action='store_true',
-        help="Test mode: go through the motions but don't tweet")
+        "-x",
+        "--test",
+        action="store_true",
+        help="Test mode: go through the motions but don't tweet",
+    )
     args = parser.parse_args()
 
     reason = flag_reason()

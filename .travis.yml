@@ -11,10 +11,12 @@ install:
  - pip install -U pip
  - pip install -U flake8
  - pip install -U -r requirements.txt
+ - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then pip install -U black; fi
 
 script:
  # Static analysis
  - flake8 --statistics --count
+ - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then black --check --diff .; fi
 
  # Dry run
  - python whyaretheflagsup.py --test -y whyaretheflagsup_example.yaml -i flag.jpg
