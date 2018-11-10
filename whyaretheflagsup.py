@@ -68,9 +68,9 @@ def build_tweet(reason):
 
     # TODO increase to 280 chars
     # An HTTPS link takes 23 characters.
-    max = 116 - 1 - 23  # max tweet with image - space - link
-    if len(tweet) > max:
-        tweet = tweet[: max - 1] + "…"
+    max_length = 116 - 1 - 23  # max tweet with image - space - link
+    if len(tweet) > max_length:
+        tweet = tweet[: max_length - 1] + "…"
 
     url = "https://whyaretheflagsup.github.io"
     tweet += " " + url
