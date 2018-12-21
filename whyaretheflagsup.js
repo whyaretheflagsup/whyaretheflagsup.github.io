@@ -47,8 +47,8 @@ function why_are_the_flags_up(date) {
     var yyyy = date.getFullYear();
     var reason = "";
     var other_reason = "";
-    var enable_background_image = true;
-
+    var flags_up = true;
+    
     // Format like 4th June 2014
     var m_names = ["January", "February", "March",
             "April", "May", "June", "July", "August", "September",
@@ -156,6 +156,7 @@ function why_are_the_flags_up(date) {
     }
     
     if (reason === "") {
+        flags_up = false;
         intro = '';
         if (past) {
             reason = 'Flags were not up in Finland on ' + date_format;
@@ -165,14 +166,13 @@ function why_are_the_flags_up(date) {
             reason = 'Flags are not up in Finland today, ' + date_format;
         }
         other_reason = "(Unless there's elections, a referendum, the president is inaugurated, or something else &ndash; <a href=\"https://github.com/whyaretheflagsup/whyaretheflagsup/issues/new\">let us know</a>)";
-        enable_background_image = false;
     }
 
     return [
+        flags_up,
         reason,
         other_reason,
         intro,
-        enable_background_image,
     ]
 
 
