@@ -48,13 +48,29 @@ function why_are_the_flags_up(date) {
     var reason = "";
     var other_reason = "";
     var enable_background_image = true;
-    
+
+    // Format like 4th June 2014
+    var m_names = ["January", "February", "March",
+            "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"];
+    var suffix = "";
+    if (dd === 1 || dd === 21 || dd === 31) {
+        suffix = "st";
+    } else if (dd === 2 || dd === 22) {
+        suffix = "nd";
+    } else if (dd === 3 || dd === 23) {
+        suffix = "rd";
+    } else {
+        suffix = "th";
+    }
+    var date_format = dd + "" + suffix + " " + m_names[mm - 1] + " " + yyyy;
+
     if (date < today) {
         past = true;
-        intro = 'Flags were up in Finland because <span id="date" class="date"></span> was:';
+        intro = 'Flags were up in Finland because ' + date_format + ' was:';
     } else if (today < date) {
         future = true;
-        intro = 'Flags will be up in Finland because <span id="date" class="date"></span> will be:';
+        intro = 'Flags will be up in Finland because ' + date_format + ' will be:';
     }
 
     // Static dates
@@ -139,29 +155,14 @@ function why_are_the_flags_up(date) {
         reason = "Latvia's 100 years of independence";
     }
     
-    // Format like 4th June 2014
-    var m_names = ["January", "February", "March",
-            "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"];
-    var suffix = "";
-    if (dd === 1 || dd === 21 || dd === 31) {
-        suffix = "st";
-    } else if (dd === 2 || dd === 22) {
-        suffix = "nd";
-    } else if (dd === 3 || dd === 23) {
-        suffix = "rd";
-    } else {
-        suffix = "th";
-    }
-    var date_format = dd + "" + suffix + " " + m_names[mm - 1] + " " + yyyy;
     if (reason === "") {
         intro = '';
         if (past) {
-            reason = 'Flags were not up in Finland on <span id="date" class="date"></span>';
+            reason = 'Flags were not up in Finland on ' + date_format;
         } else if (future) {
-            reason = 'Flags will not be up in Finland on <span id="date" class="date"></span>';
+            reason = 'Flags will not be up in Finland on ' + date_format;
         } else {
-            reason = 'Flags are not up in Finland today, <span id="date" class="date"></span>';
+            reason = 'Flags are not up in Finland today, ' + date_format;
         }
         other_reason = "(Unless there's elections, a referendum, the president is inaugurated, or something else &ndash; <a href=\"https://github.com/whyaretheflagsup/whyaretheflagsup/issues/new\">let us know</a>)";
         enable_background_image = false;
@@ -170,7 +171,6 @@ function why_are_the_flags_up(date) {
     return [
         reason,
         other_reason,
-        date_format,
         intro,
         enable_background_image,
     ]

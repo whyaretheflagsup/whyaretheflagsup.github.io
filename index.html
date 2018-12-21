@@ -125,14 +125,12 @@ function getURLParameter(name) {
     why = why_are_the_flags_up(date);
     var reason = why[0];
     var other_reason = why[1];
-    var date_format = why[2];
-    var intro = why[3];
-    var enable_background_image = why[4];
+    var intro = why[2];
+    var enable_background_image = why[3];
 
     $('#intro').html(intro);
     $('#reason').html(reason);
     $('#other_reason').html(other_reason);
-    $('#date').html(date_format);
     if (enable_background_image) {
         var htmlElement = document.querySelector("html");
         htmlElement.style.backgroundImage = 'url(images/flag.jpg)';
