@@ -114,7 +114,6 @@ function getURLParameter(name) {
 }
 
     var today = new Date();
-    today.setHours(0, 0, 0, 0); // keep date, ditch time
     dateParam = getURLParameter('date');
     if (dateParam !== 'null') {
         dateParam = dateParam.replace(/\+/g, '-'); // Replace all + with -

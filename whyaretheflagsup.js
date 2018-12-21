@@ -38,6 +38,7 @@ function is_xth_day_in_month(date, required_xth, required_day, required_mm) {
 function why_are_the_flags_up(date) {
     var today = new Date();
     today.setHours(0, 0, 0, 0); // keep date, ditch time
+    date.setHours(0, 0, 0, 0); // keep date, ditch time
     var past = false;
     var future = false;
     var day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
