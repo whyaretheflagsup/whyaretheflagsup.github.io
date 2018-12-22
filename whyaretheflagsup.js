@@ -22,12 +22,12 @@ const DECEMBER = 12;
 function is_xth_day_in_month(date, required_xth, required_day, required_mm) {
     // Is this the required_xth required_day in required_mm?
     // For example, is this the second Sunday in May?
-    var day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1; // January is 0!
+    const day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
+    const dd = date.getDate();
+    const mm = date.getMonth() + 1; // January is 0!
 
-    var max_dd = required_xth * 7;
-    var min_dd = max_dd - 6;
+    const max_dd = required_xth * 7;
+    const min_dd = max_dd - 6;
 
     if (mm === required_mm && dd >= min_dd && dd <= max_dd && day === required_day) {
         return true;
@@ -39,18 +39,18 @@ function why_are_the_flags_up(date) {
     var today = new Date();
     today.setHours(0, 0, 0, 0); // keep date, ditch time
     date.setHours(0, 0, 0, 0); // keep date, ditch time
+    const day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
+    const dd = date.getDate();
+    const mm = date.getMonth() + 1; // January is 0!
+    const yyyy = date.getFullYear();
     var past = false;
     var future = false;
-    var day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1; // January is 0!
-    var yyyy = date.getFullYear();
     var reason = "";
     var other_reason = "";
     var flags_up = true;
     
     // Format like 4th June 2014
-    var m_names = ["January", "February", "March",
+    const m_names = ["January", "February", "March",
             "April", "May", "June", "July", "August", "September",
             "October", "November", "December"];
     var suffix = "";
@@ -63,7 +63,7 @@ function why_are_the_flags_up(date) {
     } else {
         suffix = "th";
     }
-    var date_format = dd + "" + suffix + " " + m_names[mm - 1] + " " + yyyy;
+    const date_format = dd + "" + suffix + " " + m_names[mm - 1] + " " + yyyy;
 
     if (date < today) {
         past = true;

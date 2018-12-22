@@ -113,20 +113,20 @@ function getURLParameter(name) {
     );
 }
 
-    var today = new Date();
     dateParam = getURLParameter('date');
+    var date;
     if (dateParam !== 'null') {
         dateParam = dateParam.replace(/\+/g, '-'); // Replace all + with -
-        var date = new Date(dateParam);
+        date = new Date(dateParam);
     } else {
-        var date = today;
+        date = new Date(); // Today
     }
 
     why = why_are_the_flags_up(date);
-    var flags_up = why[0];
-    var reason = why[1];
-    var other_reason = why[2];
-    var intro = why[3];
+    const flags_up = why[0];
+    const reason = why[1];
+    const other_reason = why[2];
+    const intro = why[3];
 
     $('#intro').html(intro);
     $('#reason').html(reason);
