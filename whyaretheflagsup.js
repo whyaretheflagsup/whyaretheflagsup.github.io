@@ -170,9 +170,9 @@ function why_are_the_flags_up(date) {
 
     return [
         flags_up,
+        intro,
         reason,
         other_reason,
-        intro,
     ]
 
 
