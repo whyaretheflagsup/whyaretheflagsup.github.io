@@ -45,7 +45,6 @@ function why_are_the_flags_up(date) {
     const yyyy = date.getFullYear();
     var past = false;
     var future = false;
-    var reason = "";
     var other_reason = "";
     var flags_up = true;
     
@@ -71,6 +70,8 @@ function why_are_the_flags_up(date) {
     } else if (today < date) {
         future = true;
         intro = 'Flags will be up in Finland because ' + date_format + ' will be:';
+    } else {
+        intro = 'Flags are up in Finland because today, ' + date_format + ', is:';
     }
 
     // Static dates
