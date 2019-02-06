@@ -45,6 +45,7 @@ function why_are_the_flags_up(date) {
     const yyyy = date.getFullYear();
     var past = false;
     var future = false;
+    var reason ="";
     var other_reason = "";
     var flags_up = true;
     
