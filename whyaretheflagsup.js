@@ -142,6 +142,8 @@ function why_are_the_flags_up(date) {
     } else if (dd === 14 && mm === APRIL && yyyy === 2019) {
         // Exceptionally
         reason = "A parliamentary election";
+    } else if (dd === 26 && mm === MAY && yyyy === 2019) {
+        reason = "A European parliamentary election";
     }
 
     // One-offs
