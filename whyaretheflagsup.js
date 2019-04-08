@@ -129,9 +129,9 @@ function why_are_the_flags_up(date) {
         reason = "Father's Day";
     }
     
-    // General election every fourth year. Since 2011: third Sunday in April.
+    // General election every fourth year. Since 2011: third Sunday in April unless Easter affects this schedule.
     if (is_xth_day_in_month(date, 3, SUNDAY, APRIL)) {
-        if ((yyyy - 2011) % 4 === 0) {
+        if (yyyy !== 2019 && (yyyy - 2011) % 4 === 0) {
         reason = "A parliamentary election";
         }
     }
@@ -139,7 +139,11 @@ function why_are_the_flags_up(date) {
     // Other elections
     if (dd === 28 && mm === JANUARY && yyyy === 2018) {
         reason = "A presidential election";
+    } else if (dd === 14 && mm === APRIL && yyyy === 2019) {
+        // Exceptionally
+        reason = "A parliamentary election";
     }
+
     // One-offs
     if (dd === 4 && mm === SEPTEMBER && yyyy === 2014) {
         reason = "70 years since the end of the Continuation War";
