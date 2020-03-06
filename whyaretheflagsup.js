@@ -98,6 +98,8 @@ function why_are_the_flags_up(date) {
         reason = 'Birthday of the poet Eino Leino; the occasion is also a celebration of poetry and summer';
     } else if (mm === JULY && dd === 10 && yyyy >= 2017) {
         reason = "Helene Schjerfbeck Day, anniversary of the birth of the celebrated Finnish painter Helene Schjerfbeck; Finnish Visual Arts Day";
+    } else if (mm === AUGUST && dd === 9 && yyyy >= 2020) {
+        reason = "To celebrate Tove Jansson and Finnish art";
     } else if (mm === OCTOBER && dd === 1 && yyyy >= 2017) {
         reason = 'To honour Miina Sillanpää and civic influence';
     } else if (mm === OCTOBER && dd === 10) {
