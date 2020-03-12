@@ -163,6 +163,8 @@ function why_are_the_flags_up(date) {
         reason = "Estonia's 100 years of independence";
     } else if (dd === 18 && mm === NOVEMBER && yyyy === 2018) {
         reason = "Latvia's 100 years of independence";
+    } else if (dd === 13 && mm === MARCH && yyyy === 2020) {
+        reason = "80th anniversary of the end of the Winter War";
     }
     
     if (reason === "") {
