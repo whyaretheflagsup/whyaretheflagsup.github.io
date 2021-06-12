@@ -165,6 +165,8 @@ function why_are_the_flags_up(date) {
         reason = "Latvia's 100 years of independence";
     } else if (dd === 13 && mm === MARCH && yyyy === 2020) {
         reason = "80th anniversary of the end of the Winter War";
+    } else if (dd === 13 && mm === JUNE && yyyy === 2021) {
+        reason = "Municipal elections";
     }
     
     if (reason === "") {
