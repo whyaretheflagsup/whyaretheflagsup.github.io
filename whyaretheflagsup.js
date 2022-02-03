@@ -78,6 +78,8 @@ function why_are_the_flags_up(date) {
     // Static dates
     if (mm === FEBRUARY && dd === 5) {
         reason = 'Birthday of the national poet Johan Ludvig Runeberg';
+    } else if (mm === FEBRUARY && dd === 3 & & yyyy >= 2022) {
+        reason = 'Alvar and Aino Aalto day, Day of Finnish Architecture and Design';
     } else if (mm === FEBRUARY && dd === 28) {
         reason = 'Day of Kalevala; the occasion is also celebrated as the Day of Finnish culture';
     } else if (mm === MARCH && dd === 19) {
