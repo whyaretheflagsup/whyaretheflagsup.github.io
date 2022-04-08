@@ -84,6 +84,8 @@ function why_are_the_flags_up(date) {
         reason = 'Day of Kalevala; the occasion is also celebrated as the Day of Finnish culture';
     } else if (mm === MARCH && dd === 19) {
         reason = 'Birthday of novelist and playwright Minna Canth, Day of Equality';
+    } else if (mm === APRIL && dd === 8) {
+        reason = 'International Romani Day';
     } else if (mm === APRIL && dd === 9) {
         reason = 'The day Mikael Agricola, the founder of the literary Finnish died and Elias Lönnrot, a collector of folklore was born; the occasion is also celebrated as the Day of the Finnish language';
     } else if (mm === APRIL && dd === 27) {
