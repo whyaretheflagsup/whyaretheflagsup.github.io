@@ -45,7 +45,7 @@ function why_are_the_flags_up(date) {
     const yyyy = date.getFullYear();
     var past = false;
     var future = false;
-    var reason ="";
+    var reason = "";
     var other_reason = "";
     var flags_up = true;
     
@@ -98,6 +98,8 @@ function why_are_the_flags_up(date) {
         reason = 'Day of the Finnish Identity, birthday of the statesman Johan Vilhelm Snellman';
     } else if (mm === JUNE && dd === 4) {
         reason = 'Birthday of Carl Gustaf Emil Mannerheim, Marshal of Finland; the occasion is also celebrated as the Flag Day of the Finnish Defence Forces';
+    } else if (mm === JUNE && dd === 9 && yyyy >= 2021) {
+        reason = "Åland's autonomy day";
     } else if (mm === JULY && dd === 6) {
         reason = 'Birthday of the poet Eino Leino; the occasion is also a celebration of poetry and summer';
     } else if (mm === JULY && dd === 10 && yyyy >= 2017) {
