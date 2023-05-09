@@ -1,5 +1,6 @@
 BeautifulSoup4
+chromedriver-autoinstaller
 lxml
+Mastodon.py
 PyYAML
-selenium==3.3.0
-twitter
+selenium

@@ -7,15 +7,16 @@ from __future__ import annotations
 import argparse
 import datetime
 import glob
-import os
 import random
 import sys
 import webbrowser
 
+import chromedriver_autoinstaller  # pip install chromedriver-autoinstaller
 import yaml  # pip install PyYAML
-from bs4 import BeautifulSoup  # pip install BeautifulSoup4
+from bs4 import BeautifulSoup  # pip install bs4
 from mastodon import Mastodon  # pip install Mastodon.py
 from selenium import webdriver  # pip install selenium
+from selenium.webdriver.chrome.options import Options
 
 # No geolocation on Mastodon
 # HELSINKI_LAT = 60.170833
@@ -30,8 +31,10 @@ def timestamp():
 def flag_reason():
     url = "https://whyaretheflagsup.github.io"
 
-    # driver = webdriver.Chrome()
-    driver = webdriver.PhantomJS(service_log_path=os.path.devnull)  # headless
+    chromedriver_autoinstaller.install()
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, "lxml")
 
