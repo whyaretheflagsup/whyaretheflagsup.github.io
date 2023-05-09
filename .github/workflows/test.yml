@@ -33,7 +33,7 @@ jobs:
       - name: Dummy run
         run: |
           python whyaretheflagsup.py --help
-          python whyaretheflagsup.py --test -y whyaretheflagsup_example.yaml -i images/flag.jpg
+          python whyaretheflagsup.py --test -y whyaretheflagsup_example.yaml -i images/flag.jpg -x
 
   success:
     needs: test
