@@ -1,5 +1,5 @@
 BeautifulSoup4
-lxml
+chromedriver-autoinstaller
+Mastodon.py
 PyYAML
 selenium
-twitter
