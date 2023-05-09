@@ -36,24 +36,24 @@ function is_xth_day_in_month(date, required_xth, required_day, required_mm) {
 }
 
 function why_are_the_flags_up(date) {
-    var today = new Date();
+    let today = new Date();
     today.setHours(0, 0, 0, 0); // keep date, ditch time
     date.setHours(0, 0, 0, 0); // keep date, ditch time
     const day = date.getDay(); // Sunday is 0, Monday is 1, ... Saturday is 6
     const dd = date.getDate();
     const mm = date.getMonth() + 1; // January is 0!
     const yyyy = date.getFullYear();
-    var past = false;
-    var future = false;
-    var reason = "";
-    var other_reason = "";
-    var flags_up = true;
-    
+    let past = false;
+    let future = false;
+    let reason = "";
+    let other_reason = "";
+    let flags_up = true;
+
     // Format like 4th June 2014
     const m_names = ["January", "February", "March",
             "April", "May", "June", "July", "August", "September",
             "October", "November", "December"];
-    var suffix = "";
+    let suffix = "";
     if (dd === 1 || dd === 21 || dd === 31) {
         suffix = "st";
     } else if (dd === 2 || dd === 22) {
@@ -121,7 +121,7 @@ function why_are_the_flags_up(date) {
     } else if (mm === DECEMBER && dd === 8) {
         reason = 'Birthday of the composer Jean Sibelius; the occasion is also celebrated as the Day of Finnish music';
     }
-    
+
     // Moveable dates
     if (is_xth_day_in_month(date, 2, SUNDAY, MAY)) {
         reason = "Mother's Day";
@@ -136,7 +136,7 @@ function why_are_the_flags_up(date) {
     } else if (is_xth_day_in_month(date, 2, SUNDAY, NOVEMBER)) {
         reason = "Father's Day";
     }
-    
+
     // General election every fourth year.
     // Since 2011: third Sunday in April unless Easter affects this schedule.
     if (is_xth_day_in_month(date, 3, SUNDAY, APRIL)) {
@@ -144,7 +144,7 @@ function why_are_the_flags_up(date) {
         reason = "A parliamentary election";
         }
     }
-    
+
     // Other elections
     if (dd === 28 && mm === JANUARY && yyyy === 2018) {
         reason = "A presidential election";
@@ -178,7 +178,7 @@ function why_are_the_flags_up(date) {
     } else if (dd === 13 && mm === MARCH && yyyy === 2020) {
         reason = "80th anniversary of the end of the Winter War";
     }
-    
+
     if (reason === "") {
         flags_up = false;
         intro = '';
@@ -201,5 +201,3 @@ function why_are_the_flags_up(date) {
 
 
 }
-
-

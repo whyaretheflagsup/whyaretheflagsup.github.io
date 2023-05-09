@@ -1,31 +1,32 @@
 #!/usr/bin/env python
-# encoding: utf-8
 """
 Scrape'n'tweet when the flags are up
 """
-from bs4 import BeautifulSoup  # pip install BeautifulSoup4
-from selenium import webdriver  # pip install selenium
+from __future__ import annotations
+
 import argparse
 import datetime
 import glob
 import os
 import random
 import sys
-import twitter  # pip install twitter
 import webbrowser
+
+import twitter  # pip install twitter
 import yaml  # pip install PyYAML
+from bs4 import BeautifulSoup  # pip install BeautifulSoup4
+from selenium import webdriver  # pip install selenium
 
 HELSINKI_LAT = 60.170833
 HELSINKI_LONG = 24.9375
 
 
 def timestamp():
-    """ Print a timestamp and the filename with path """
+    """Print a timestamp and the filename with path"""
     print(datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p") + " " + __file__)
 
 
 def flag_reason():
-
     url = "https://whyaretheflagsup.github.io"
 
     # driver = webdriver.Chrome()
@@ -92,7 +93,7 @@ def random_img(spec):
 
 
 def tweet_it(string, credentials, image=None):
-    """ Tweet string and image using credentials """
+    """Tweet string and image using credentials"""
     if len(string) <= 0:
         return
 
@@ -113,7 +114,6 @@ def tweet_it(string, credentials, image=None):
     if args.test:
         print("(Test mode, not actually tweeting)")
     else:
-
         if image:
             print("Upload image")
 
@@ -154,7 +154,6 @@ def tweet_it(string, credentials, image=None):
 
 
 if __name__ == "__main__":
-
     timestamp()
 
     parser = argparse.ArgumentParser(
