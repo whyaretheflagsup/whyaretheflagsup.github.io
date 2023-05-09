@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Scrape'n'tweet when the flags are up
+Scrape'n'toot when the flags are up
 """
 from __future__ import annotations
 
@@ -12,13 +12,14 @@ import random
 import sys
 import webbrowser
 
-import twitter  # pip install twitter
 import yaml  # pip install PyYAML
 from bs4 import BeautifulSoup  # pip install BeautifulSoup4
+from mastodon import Mastodon  # pip install Mastodon.py
 from selenium import webdriver  # pip install selenium
 
-HELSINKI_LAT = 60.170833
-HELSINKI_LONG = 24.9375
+# No geolocation on Mastodon
+# HELSINKI_LAT = 60.170833
+# HELSINKI_LONG = 24.9375
 
 
 def timestamp():
@@ -43,38 +44,36 @@ def flag_reason():
     return reason
 
 
-def load_yaml(filename):
+def load_yaml(filename: str) -> dict[str, str]:
     """
     File should contain:
-    consumer_key: TODO_ENTER_YOURS
-    consumer_secret: TODO_ENTER_YOURS
-    access_token: TODO_ENTER_YOURS
-    access_token_secret: TODO_ENTER_YOURS
+    mastodon_client_id: TODO_ENTER_YOURS
+    mastodon_client_secret: TODO_ENTER_YOURS
+    mastodon_access_token: TODO_ENTER_YOURS
     """
     with open(filename) as f:
         data = yaml.safe_load(f)
 
     if not data.keys() >= {
-        "access_token",
-        "access_token_secret",
-        "consumer_key",
-        "consumer_secret",
+        "mastodon_client_id",
+        "mastodon_client_secret",
+        "mastodon_access_token",
     }:
-        sys.exit("Twitter credentials missing from YAML: " + filename)
+        sys.exit(f"Mastodon credentials missing from YAML: {filename}")
     return data
 
 
-def build_tweet(reason):
-    tweet = "Flags are up in Finland because today is: " + reason
+def build_toot(reason):
+    toot = "Flags are up in Finland because today is: " + reason
 
     # An HTTPS link takes 23 characters.
-    max_length = 256 - 1 - 23  # max tweet with image - space - link
-    if len(tweet) > max_length:
-        tweet = tweet[: max_length - 1] + "…"
+    max_length = 500 - 1 - 23  # max tweet with image - space - link
+    if len(toot) > max_length:
+        toot = toot[: max_length - 1] + "…"
 
     url = "https://whyaretheflagsup.github.io"
-    tweet += " " + url
-    return tweet
+    toot += " " + url
+    return toot
 
 
 def random_img(spec):
@@ -92,79 +91,62 @@ def random_img(spec):
     return random_image
 
 
-def tweet_it(string, credentials, image=None):
-    """Tweet string and image using credentials"""
-    if len(string) <= 0:
+def toot_it(
+    status: str,
+    credentials: dict[str, str],
+    image_path: str = None,
+    *,
+    test: bool = False,
+    no_web: bool = False,
+) -> None:
+    """Toot using credentials"""
+    if len(status) <= 0:
         return
 
-    # Create and authorise an app with (read and) write access at:
-    # https://dev.twitter.com/apps/new
+    # Create and authorise an app with (read and) write access following:
+    # https://gist.github.com/aparrish/661fca5ce7b4882a8c6823db12d42d26
     # Store credentials in YAML file
-    t = twitter.Twitter(
-        auth=twitter.OAuth(
-            credentials["access_token"],
-            credentials["access_token_secret"],
-            credentials["consumer_key"],
-            credentials["consumer_secret"],
-        )
+    api = Mastodon(
+        credentials["mastodon_client_id"],
+        credentials["mastodon_client_secret"],
+        credentials["mastodon_access_token"],
+        api_base_url="https://botsin.space",
     )
 
-    print("TWEETING THIS:\n", string)
+    print("TOOTING THIS:\n", status)
 
-    if args.test:
-        print("(Test mode, not actually tweeting)")
-    else:
-        if image:
-            print("Upload image")
+    if test:
+        print("(Test mode, not actually tooting)")
+        return
 
-            # Send images along with your tweets:
-            # First just read image from the web or from files the regular way
-            with open(image, "rb") as imagefile:
-                imagedata = imagefile.read()
-            # TODO dedupe auth=OAuth(...)
-            t_up = twitter.Twitter(
-                domain="upload.twitter.com",
-                auth=twitter.OAuth(
-                    credentials["access_token"],
-                    credentials["access_token_secret"],
-                    credentials["consumer_key"],
-                    credentials["consumer_secret"],
-                ),
-            )
-            id_img = t_up.media.upload(media=imagedata)["media_id_string"]
-        else:
-            id_img = None  # Does t.statuses.update work with this?
+    media_ids = []
+    if image_path:
+        print("Upload image")
 
-        result = t.statuses.update(
-            status=string,
-            lat=HELSINKI_LAT,
-            long=HELSINKI_LONG,
-            display_coordinates=True,
-            media_ids=id_img,
-        )
-        url = (
-            "http://twitter.com/"
-            + result["user"]["screen_name"]
-            + "/status/"
-            + result["id_str"]
-        )
-        print("Tweeted:\n" + url)
-        if not args.no_web:
-            webbrowser.open(url, new=2)  # 2 = open in a new tab, if possible
+        media = api.media_post(media_file=image_path)
+        media_ids.append(media["id"])
+
+    # No geolocation on Mastodon
+    # https://github.com/mastodon/mastodon/issues/8340
+    toot = api.status_post(status, media_ids=media_ids, visibility="public")
+
+    url = toot["url"]
+    print("Tooted:\n" + url)
+    if not no_web:
+        webbrowser.open(url, new=2)  # 2 = open in a new tab, if possible
 
 
-if __name__ == "__main__":
+def main() -> None:
     timestamp()
-
     parser = argparse.ArgumentParser(
-        description="Scrape'n'tweet when the flags are up",
+        description="Scrape'n'toot when the flags are up",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "-y",
         "--yaml",
         default="/Users/hugo/Dropbox/bin/data/whyaretheflagsup.yaml",
-        help="YAML file location containing Twitter keys and secrets",
+        help="YAML file location containing Mastodon keys and secrets",
     )
     parser.add_argument(
         "-i",
@@ -176,13 +158,13 @@ if __name__ == "__main__":
         "-nw",
         "--no-web",
         action="store_true",
-        help="Don't open a web browser to show the tweeted tweet",
+        help="Don't open a web browser to show the tooted toot",
     )
     parser.add_argument(
         "-x",
         "--test",
         action="store_true",
-        help="Test mode: go through the motions but don't tweet",
+        help="Test mode: go through the motions but don't toot anything",
     )
     args = parser.parse_args()
 
@@ -194,12 +176,14 @@ if __name__ == "__main__":
     print("Flags are up!")
     print(reason)
 
-    tweet = build_tweet(reason)
+    status = build_toot(reason)
 
-    twitter_credentials = load_yaml(args.yaml)
+    credentials = load_yaml(args.yaml)
 
-    print("Tweet this:\n", tweet)
-    image = random_img(args.image)
-    tweet_it(tweet, twitter_credentials, image)
+    print("Toot this:\n", status)
+    image_path = random_img(args.image)
+    toot_it(status, credentials, image_path)
 
-# End of file
+
+if __name__ == "__main__":
+    main()
