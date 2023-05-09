@@ -185,7 +185,7 @@ def main() -> None:
 
     print("Toot this:\n", status)
     image_path = random_img(args.image)
-    toot_it(status, credentials, image_path)
+    toot_it(status, credentials, image_path, test=args.test, no_web=args.no_web)
 
 
 if __name__ == "__main__":
