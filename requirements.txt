@@ -1,6 +1,5 @@
 BeautifulSoup4
 chromedriver-autoinstaller
-lxml
 Mastodon.py
 PyYAML
 selenium

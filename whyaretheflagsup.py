@@ -36,7 +36,7 @@ def flag_reason():
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
-    soup = BeautifulSoup(driver.page_source, "lxml")
+    soup = BeautifulSoup(driver.page_source, "html.parser")
 
     # <div class="reason" id="reason"></div>
 
