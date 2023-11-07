@@ -177,6 +177,8 @@ function why_are_the_flags_up(date) {
         reason = "Latvia's 100 years of independence";
     } else if (dd === 13 && mm === MARCH && yyyy === 2020) {
         reason = "80th anniversary of the end of the Winter War";
+    } else if (dd === 10 && mm === NOVEMBER && yyyy === 2023) {
+        reason = "State funeral of President Martti Ahtisaari";
     }
 
     if (reason === "") {
