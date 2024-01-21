@@ -1,176 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <link href="favicon.ico" rel="icon" type="image/x-icon"/>
-    <title>
-        Why are the flags up in Finland?
-    </title>
+  <head>
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <title>Why are the flags up in Finland?</title>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@finnishflags">
-    <meta name="twitter:title" content="Why Are The Flags Up in Finland?">
-    <meta name="twitter:description" content="Are the flags up in Finland? Find out why.">
-    <meta name="twitter:image" content="https://whyaretheflagsup.github.io/images/flag.jpg">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@finnishflags" />
+    <meta name="twitter:title" content="Why Are The Flags Up in Finland?" />
+    <meta
+      name="twitter:description"
+      content="Are the flags up in Finland? Find out why."
+    />
+    <meta
+      name="twitter:image"
+      content="https://whyaretheflagsup.github.io/images/flag.jpg"
+    />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css"
+    />
 
     <style type="text/css">
-        .intro, .reason, .other_reason {
-            font-family: sans-serif;
-            font-weight: normal;
-            text-align: center;
-        }
+      .intro,
+      .reason,
+      .other_reason {
+        font-family: sans-serif;
+        font-weight: normal;
+        text-align: center;
+      }
 
-        body {
-            background-image: url(pattern.png);
-        }
+      body {
+        background-image: url(pattern.png);
+      }
 
-        .intro {
-            padding-top: 5px;
-        }
+      .intro {
+        padding-top: 5px;
+      }
 
-        .outline {
-            color: white;
-            text-shadow:
-                -2px -2px 0 black,
-                2px -2px 0 black,
-                -2px 2px 0 black,
-                2px 2px 0 black;
-        }
+      .outline {
+        color: white;
+        text-shadow:
+          -2px -2px 0 black,
+          2px -2px 0 black,
+          -2px 2px 0 black,
+          2px 2px 0 black;
+      }
 
-        #reason-container {
-          padding: 5px;
-          position: absolute;
-          top: 48px;
-          bottom: 60px;
-          left: 0;
-          right: 0;
-          text-align: center;
-        }
+      #reason-container {
+        padding: 5px;
+        position: absolute;
+        top: 48px;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
 
-        /* Sticky footer */
-        * {
-            margin: 0;
-        }
+      /* Sticky footer */
+      * {
+        margin: 0;
+      }
 
-        html, body {
-            height: 100%;
-        }
+      html,
+      body {
+        height: 100%;
+      }
 
-        .page-wrap {
-            min-height: 100%;
-            /* equal to footer height */
-            margin-bottom: -60px;
-        }
+      .page-wrap {
+        min-height: 100%;
+        /* equal to footer height */
+        margin-bottom: -60px;
+      }
 
-        .page-wrap:after {
-            content: "";
-            display: block;
-        }
+      .page-wrap:after {
+        content: "";
+        display: block;
+      }
 
-        .site-footer, .page-wrap:after {
-            /* .push must be the same height as footer */
-            height: 60px;
-        }
+      .site-footer,
+      .page-wrap:after {
+        /* .push must be the same height as footer */
+        height: 60px;
+      }
 
-        .site-footer {
-        }
+      .site-footer {
+      }
 
-        /* Background image */
-        html {
-            background: no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
+      /* Background image */
+      html {
+        background: no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
 
-        .github-fork-ribbon:before {
-            background-color: #18447E;
-        }
+      .github-fork-ribbon:before {
+        background-color: #18447e;
+      }
     </style>
 
-    <script src='jquery-1.11.2.min.js'></script>
+    <script src="jquery-1.11.2.min.js"></script>
     <script src="jquery.textfill.min.js"></script>
     <script src="whyaretheflagsup.js"></script>
 
     <script type="text/javascript">
-        <!--
-$(document).ready(function() {
+      <!--
+      $(document).ready(function () {
+        function getURLParameter(name) {
+          return decodeURI(
+            (RegExp(name + "=" + "(.+?)(&|$)").exec(location.search) || [, null])[1],
+          );
+        }
 
-function getURLParameter(name) {
-    return decodeURI(
-        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    );
-}
+        dateParam = getURLParameter("date");
+        var date;
+        if (dateParam !== "null") {
+          dateParam = dateParam.replace(/\+/g, "-"); // Replace all + with -
+          date = new Date(dateParam);
+        } else {
+          date = new Date(); // Today
+        }
 
-    dateParam = getURLParameter('date');
-    var date;
-    if (dateParam !== 'null') {
-        dateParam = dateParam.replace(/\+/g, '-'); // Replace all + with -
-        date = new Date(dateParam);
-    } else {
-        date = new Date(); // Today
-    }
+        why = why_are_the_flags_up(date);
+        const flags_up = why[0];
+        const intro = why[1];
+        const reason = why[2];
+        const other_reason = why[3];
 
-    why = why_are_the_flags_up(date);
-    const flags_up = why[0];
-    const intro = why[1];
-    const reason = why[2];
-    const other_reason = why[3];
+        $("#intro").html(intro);
+        $("#reason").html(reason);
+        $("#other_reason").html(other_reason);
+        if (flags_up) {
+          var htmlElement = document.querySelector("html");
+          htmlElement.style.backgroundImage = "url(images/flag.jpg)";
+          $("#reason").addClass("outline");
+          $(".reason-container").css({ bottom: "0" });
+        }
+        $("#reason-container").textfill({ maxFontPixels: 0 });
+      });
 
-    $('#intro').html(intro);
-    $('#reason').html(reason);
-    $('#other_reason').html(other_reason);
-    if (flags_up) {
-        var htmlElement = document.querySelector("html");
-        htmlElement.style.backgroundImage = 'url(images/flag.jpg)';
-        $("#reason").addClass("outline");
-        $(".reason-container").css({"bottom": "0"});
-    }
-    $('#reason-container').textfill({maxFontPixels: 0});
-});
+      $(window).resize(function () {
+        $("#reason-container").textfill({ maxFontPixels: 0 });
+      });
 
-$(window).resize(function() {
-  $('#reason-container').textfill({maxFontPixels: 0});
-});
-
-        -->
+      -->
     </script>
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
 
-        ga('create', 'UA-2827121-8', 'hugovk.github.io');
-        ga('send', 'pageview');
+      ga("create", "UA-2827121-8", "hugovk.github.io");
+      ga("send", "pageview");
     </script>
-</head>
-<body>
-<div class="page-wrap">
+  </head>
+  <body>
+    <div class="page-wrap">
+      <a
+        class="github-fork-ribbon left-right"
+        href="https://github.com/whyaretheflagsup/whyaretheflagsup"
+        title="Fork me on GitHub"
+        >Fork me on GitHub</a
+      >
 
-    <a class="github-fork-ribbon left-right" href="https://github.com/whyaretheflagsup/whyaretheflagsup" title="Fork me on GitHub">Fork me on GitHub</a>
-
-    <H2>
+      <h2>
         <div id="intro" class="intro outline"></div>
-    </H2>
-    <H1>
+      </h2>
+      <h1>
         <div id="reason-container"><span id="reason" class="reason"></span></div>
-    </H1>
+      </h1>
+    </div>
 
-</div>
+    <footer class="site-footer">
+      <p>&nbsp;</p>
 
-<footer class="site-footer"><P>&nbsp;</P>
-
-    <div id="other_reason" class="other_reason"></div>
-</footer>
-</body>
+      <div id="other_reason" class="other_reason"></div>
+    </footer>
+  </body>
 </html>
