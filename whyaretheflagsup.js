@@ -174,7 +174,8 @@ function why_are_the_flags_up(date) {
   // Other elections
   if (
     (dd === 28 && mm === JANUARY && yyyy === 2018) ||
-    (dd === 28 && mm === JANUARY && yyyy === 2024)
+    (dd === 28 && mm === JANUARY && yyyy === 2024) ||
+    (dd === 11 && mm === FEBRUARY && yyyy === 2024)
   ) {
     reason = "A presidential election";
   } else if (
