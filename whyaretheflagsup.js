@@ -211,6 +211,8 @@ function why_are_the_flags_up(date) {
     reason = "80th anniversary of the end of the Winter War";
   } else if (dd === 10 && mm === NOVEMBER && yyyy === 2023) {
     reason = "State funeral of President Martti Ahtisaari";
+  } else if (dd === 1 && mm === MARCH && yyyy === 2024) {
+    reason = "Inauguration of the President of the Republic";
   }
 
   if (reason === "") {
