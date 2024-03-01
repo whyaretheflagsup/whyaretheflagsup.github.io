@@ -118,8 +118,8 @@
           );
         }
 
-        dateParam = getURLParameter("date");
-        var date;
+        let dateParam = getURLParameter("date");
+        let date;
         if (dateParam !== "null") {
           dateParam = dateParam.replace(/\+/g, "-"); // Replace all + with -
           date = new Date(dateParam);
@@ -127,7 +127,7 @@
           date = new Date(); // Today
         }
 
-        why = why_are_the_flags_up(date);
+        const why = why_are_the_flags_up(date);
         const flags_up = why[0];
         const intro = why[1];
         const reason = why[2];
@@ -137,7 +137,7 @@
         $("#reason").html(reason);
         $("#other_reason").html(other_reason);
         if (flags_up) {
-          var htmlElement = document.querySelector("html");
+          const htmlElement = document.querySelector("html");
           htmlElement.style.backgroundImage = "url(images/flag.jpg)";
           $("#reason").addClass("outline");
           $(".reason-container").css({ bottom: "0" });
