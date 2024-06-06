@@ -45,7 +45,7 @@ function why_are_the_flags_up(date) {
   const yyyy = date.getFullYear();
   let past = false;
   let future = false;
-  let reason = "";
+  let reasons = [];
   let other_reason = "";
   let flags_up = true;
 
@@ -88,69 +88,78 @@ function why_are_the_flags_up(date) {
 
   // Static dates
   if (mm === FEBRUARY && dd === 5) {
-    reason = "Birthday of the national poet Johan Ludvig Runeberg";
+    reasons.push("birthday of the national poet Johan Ludvig Runeberg");
   } else if (mm === FEBRUARY && dd === 3 && yyyy >= 2022) {
-    reason = "Alvar and Aino Aalto day, Day of Finnish Architecture and Design";
+    reasons.push("Alvar and Aino Aalto day, Day of Finnish Architecture and Design");
   } else if (mm === FEBRUARY && dd === 28) {
-    reason =
-      "Day of Kalevala; the occasion is also celebrated as the Day of Finnish culture";
+    reasons.push(
+      "Day of Kalevala; the occasion is also celebrated as the Day of Finnish culture",
+    );
   } else if (mm === MARCH && dd === 19) {
-    reason = "Birthday of novelist and playwright Minna Canth, Day of Equality";
+    reasons.push("birthday of novelist and playwright Minna Canth, Day of Equality");
   } else if (mm === APRIL && dd === 8) {
-    reason = "International Romani Day";
+    reasons.push("International Romani Day");
   } else if (mm === APRIL && dd === 9) {
-    reason =
-      "The day Mikael Agricola, the founder of the literary Finnish died and Elias Lönnrot, a collector of folklore was born; the occasion is also celebrated as the Day of the Finnish language";
+    reasons.push(
+      "the day Mikael Agricola, the founder of the literary Finnish died and Elias Lönnrot, a collector of folklore was born; the occasion is also celebrated as the Day of the Finnish language",
+    );
   } else if (mm === APRIL && dd === 27) {
-    reason = "National War Veterans' Day";
+    reasons.push("National War Veterans' Day");
   } else if (mm === MAY && dd === 1) {
-    reason = "Vappu, the Day of Finnish Labour";
+    reasons.push("Vappu, the Day of Finnish Labour");
   } else if (mm === MAY && dd === 9) {
-    reason = "Europe Day";
+    reasons.push("Europe Day");
   } else if (mm === MAY && dd === 12) {
-    reason =
-      "Day of the Finnish Identity, birthday of the statesman Johan Vilhelm Snellman";
+    reasons.push(
+      "Day of the Finnish Identity, birthday of the statesman Johan Vilhelm Snellman",
+    );
   } else if (mm === JUNE && dd === 4) {
-    reason =
-      "Birthday of Carl Gustaf Emil Mannerheim, Marshal of Finland; the occasion is also celebrated as the Flag Day of the Finnish Defence Forces";
+    reasons.push(
+      "birthday of Carl Gustaf Emil Mannerheim, Marshal of Finland; the occasion is also celebrated as the Flag Day of the Finnish Defence Forces",
+    );
   } else if (mm === JUNE && dd === 9 && yyyy >= 2021) {
-    reason = "Åland's autonomy day";
+    reasons.push("Åland's autonomy day");
   } else if (mm === JULY && dd === 6) {
-    reason =
-      "Birthday of the poet Eino Leino; the occasion is also a celebration of poetry and summer";
+    reasons.push(
+      "birthday of the poet Eino Leino; the occasion is also a celebration of poetry and summer",
+    );
   } else if (mm === JULY && dd === 10 && yyyy >= 2017) {
-    reason =
-      "Helene Schjerfbeck Day, anniversary of the birth of the celebrated Finnish painter Helene Schjerfbeck; Finnish Visual Arts Day";
+    reasons.push(
+      "Helene Schjerfbeck Day, anniversary of the birth of the celebrated Finnish painter Helene Schjerfbeck; Finnish Visual Arts Day",
+    );
   } else if (mm === AUGUST && dd === 9 && yyyy >= 2020) {
-    reason = "To celebrate Tove Jansson and Finnish art";
+    reasons.push("to celebrate Tove Jansson and Finnish art");
   } else if (mm === OCTOBER && dd === 1 && yyyy >= 2017) {
-    reason = "To honour Miina Sillanpää and civic influence";
+    reasons.push("to honour Miina Sillanpää and civic influence");
   } else if (mm === OCTOBER && dd === 10) {
-    reason =
-      "Birthday of the National writer Aleksis Kivi; the occasion is also celebrated as the Day of Finnish literature";
+    reasons.push(
+      "birthday of the National writer Aleksis Kivi; the occasion is also celebrated as the Day of Finnish literature",
+    );
   } else if (mm === OCTOBER && dd === 24) {
-    reason = "Day of the United Nations";
+    reasons.push("Day of the United Nations");
   } else if (mm === NOVEMBER && dd === 6) {
-    reason = "Day of the Swedish Identity and Gustavus Adolphus Day";
+    reasons.push("Day of the Swedish Identity and Gustavus Adolphus Day");
   } else if (mm === NOVEMBER && dd === 20) {
-    reason = "Universal Children's Day";
+    reasons.push("Universal Children's Day");
   } else if (mm === DECEMBER && dd === 6) {
-    reason = "Independence Day";
+    reasons.push("Independence Day");
   } else if (mm === DECEMBER && dd === 8) {
-    reason =
-      "Birthday of the composer Jean Sibelius; the occasion is also celebrated as the Day of Finnish music";
+    reasons.push(
+      "Birthday of the composer Jean Sibelius; the occasion is also celebrated as the Day of Finnish music",
+    );
   }
 
   // Moveable dates
   if (is_xth_day_in_month(date, 2, SUNDAY, MAY)) {
-    reason = "Mother's Day";
+    reasons.push("Mother's Day");
   } else if (is_xth_day_in_month(date, 3, SUNDAY, MAY)) {
-    reason =
-      "Memorial day for the war dead (everyone who has died in Finnish wars, combat-like duties or peacekeeping operations both during fighting and after they've ceased, including those executed or who have died as a POW)";
+    reasons.push(
+      "memorial day for the war dead (everyone who has died in Finnish wars, combat-like duties or peacekeeping operations both during fighting and after they've ceased, including those executed or who have died as a POW)",
+    );
   } else if (mm === JUNE && dd >= 19 && dd <= 25 && day === FRIDAY) {
-    reason = "Midsummer's eve";
+    reasons.push("Midsummer's eve");
   } else if (mm === JUNE && dd >= 20 && dd <= 26 && day === SATURDAY) {
-    reason = "Midsummer";
+    reasons.push("Midsummer");
   } else if (
     mm === AUGUST &&
     dd >= 25 &&
@@ -158,16 +167,16 @@ function why_are_the_flags_up(date) {
     day === SATURDAY &&
     yyyy >= 2017
   ) {
-    reason = "Finnish Nature Day";
+    reasons.push("Finnish Nature Day");
   } else if (is_xth_day_in_month(date, 2, SUNDAY, NOVEMBER)) {
-    reason = "Father's Day";
+    reasons.push("Father's Day");
   }
 
   // General election every fourth year.
   // Since 2011: third Sunday in April unless Easter affects this schedule.
   if (is_xth_day_in_month(date, 3, SUNDAY, APRIL)) {
     if (![2019, 2023].includes(yyyy) && (yyyy - 2011) % 4 === 0) {
-      reason = "A parliamentary election";
+      reasons.push("a parliamentary election");
     }
   }
 
@@ -177,59 +186,59 @@ function why_are_the_flags_up(date) {
     (dd === 28 && mm === JANUARY && yyyy === 2024) ||
     (dd === 11 && mm === FEBRUARY && yyyy === 2024)
   ) {
-    reason = "A presidential election";
+    reasons.push("a presidential election");
   } else if (
     (dd === 14 && mm === APRIL && yyyy === 2019) ||
     (dd === 2 && mm === APRIL && yyyy === 2023)
   ) {
     // Exceptionally
-    reason = "A parliamentary election";
+    reasons.push("a parliamentary election");
   } else if (dd === 26 && mm === MAY && yyyy === 2019) {
-    reason = "A European parliamentary election";
+    reasons.push("a European parliamentary election");
   } else if (dd === 13 && mm === JUNE && yyyy === 2021) {
-    reason = "Municipal elections";
+    reasons.push("municipal elections");
   } else if (dd === 23 && mm === JANUARY && yyyy === 2022) {
-    reason = "County elections";
+    reasons.push("county elections");
   } else if (dd === 9 && mm === JUNE && yyyy === 2024) {
-    reason = "A European parliamentary election and Åland's autonomy day";
+    reasons.push("a European parliamentary election");
   }
 
   // One-offs
   if (dd === 4 && mm === SEPTEMBER && yyyy === 2014) {
-    reason = "70 years since the end of the Continuation War";
+    reasons.push("70 years since the end of the Continuation War");
   } else if (dd === 5 && mm === DECEMBER && yyyy === 2017) {
-    reason = "Finland's Centenary Independence Day Eve";
+    reasons.push("Finland's Centenary Independence Day Eve");
   } else if (dd === 1 && mm === FEBRUARY && yyyy === 2018) {
-    reason = "Inauguration of the President";
+    reasons.push("Inauguration of the President");
   } else if (dd === 28 && mm === MAY && yyyy === 2018) {
-    reason = "100th anniversary of the Finnish flag";
+    reasons.push("100th anniversary of the Finnish flag");
   } else if (dd === 16 && mm === FEBRUARY && yyyy === 2018) {
-    reason = "Lithuania's 100 years of independence";
+    reasons.push("Lithuania's 100 years of independence");
   } else if (dd === 24 && mm === FEBRUARY && yyyy === 2018) {
-    reason = "Estonia's 100 years of independence";
+    reasons.push("Estonia's 100 years of independence");
   } else if (dd === 18 && mm === NOVEMBER && yyyy === 2018) {
-    reason = "Latvia's 100 years of independence";
+    reasons.push("Latvia's 100 years of independence");
   } else if (dd === 13 && mm === MARCH && yyyy === 2020) {
-    reason = "80th anniversary of the end of the Winter War";
+    reasons.push("80th anniversary of the end of the Winter War");
   } else if (dd === 10 && mm === NOVEMBER && yyyy === 2023) {
-    reason = "State funeral of President Martti Ahtisaari";
+    reasons.push("State funeral of President Martti Ahtisaari");
   } else if (dd === 1 && mm === MARCH && yyyy === 2024) {
-    reason = "Inauguration of the President of the Republic";
+    reasons.push("Inauguration of the President of the Republic");
   }
 
-  if (reason === "") {
+  if (reasons.length === 0) {
     flags_up = false;
     intro = "";
     if (past) {
-      reason = "Flags were not up in Finland on " + date_format;
+      reasons.push("Flags were not up in Finland on " + date_format);
     } else if (future) {
-      reason = "Flags will not be up in Finland on " + date_format;
+      reasons.push("Flags will not be up in Finland on " + date_format);
     } else {
-      reason = "Flags are not up in Finland today, " + date_format;
+      reasons.push("Flags are not up in Finland today, " + date_format);
     }
     other_reason =
       '(Unless there\'s elections, a referendum, the president is inaugurated, or something else &ndash; <a href="https://github.com/whyaretheflagsup/whyaretheflagsup/issues/new">let us know</a>)';
   }
 
-  return [flags_up, intro, reason, other_reason];
+  return [flags_up, intro, reasons, other_reason];
 }

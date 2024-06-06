@@ -130,11 +130,13 @@
         const why = why_are_the_flags_up(date);
         const flags_up = why[0];
         const intro = why[1];
-        const reason = why[2];
+        let reasons = why[2].join(" and ");
+        // Capitalise first letter
+        reasons = reasons.charAt(0).toUpperCase() + reasons.slice(1);
         const other_reason = why[3];
 
         $("#intro").html(intro);
-        $("#reason").html(reason);
+        $("#reason").html(reasons);
         $("#other_reason").html(other_reason);
         if (flags_up) {
           const htmlElement = document.querySelector("html");
