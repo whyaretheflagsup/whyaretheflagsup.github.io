@@ -190,6 +190,8 @@ function why_are_the_flags_up(date) {
     reason = "Municipal elections";
   } else if (dd === 23 && mm === JANUARY && yyyy === 2022) {
     reason = "County elections";
+  } else if (dd === 9 && mm === JUNE && yyyy === 2024) {
+    reason = "A European parliamentary election and Åland's autonomy day";
   }
 
   // One-offs
