@@ -201,6 +201,8 @@ function why_are_the_flags_up(date) {
     reasons.push("county elections");
   } else if (dd === 9 && mm === JUNE && yyyy === 2024) {
     reasons.push("a European parliamentary election");
+  } else if (dd === 13 && mm === APRIL && yyyy === 2025) {
+    reasons.push("county and municipal elections");
   }
 
   // One-offs
