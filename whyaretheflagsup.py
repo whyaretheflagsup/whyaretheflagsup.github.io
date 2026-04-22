@@ -2,6 +2,7 @@
 """
 Scrape'n'toot when the flags are up
 """
+
 from __future__ import annotations
 
 import argparse
