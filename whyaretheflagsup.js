@@ -103,6 +103,8 @@ function why_are_the_flags_up(date) {
     reasons.push(
       "the day Mikael Agricola, the founder of the literary Finnish died and Elias Lönnrot, a collector of folklore was born; the occasion is also celebrated as the Day of the Finnish language",
     );
+  } else if (mm === APRIL && dd === 20 && yyyy >= 2025) {
+    reasons.push("Evacuees' Flag Day");
   } else if (mm === APRIL && dd === 27) {
     reasons.push("National War Veterans' Day");
   } else if (mm === MAY && dd === 1) {
